@@ -1,0 +1,23 @@
+{
+    "root": true,
+    "env": {
+        "node": true,
+        "browser": true
+    },
+    "globals": {
+        "$nuxt": true
+    },
+    "parserOptions": {
+        "parser": "babel-eslint"
+    },
+    "extends": [
+        "plugin:vue/essential",
+        "eslint:recommended",
+        "prettier/vue"
+    ],
+    "rules": {
+        "no-console": 0,
+        "no-debugger": 0,
+        "no-unused-vars": 1
+    }
+}
