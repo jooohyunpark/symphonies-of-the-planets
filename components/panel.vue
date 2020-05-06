@@ -1,16 +1,20 @@
 <template>
-  <div class="panel"></div>
+  <div class="panel" :style="{ width: size + 'px', height: size + 'px' }"></div>
 </template>
 
 <script>
 export default {
-  components: {},
+  props: {
+    size: {
+      type: Number,
+      default: 100,
+    },
+  },
 }
 </script>
 
 <style lang="scss" scoped>
 .panel {
-  width: 100px;
-  height: 100px;
+  border: 1px solid gray;
 }
 </style>
