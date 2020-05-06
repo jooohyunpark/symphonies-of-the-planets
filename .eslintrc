@@ -13,7 +13,8 @@
     "extends": [
         "plugin:vue/essential",
         "eslint:recommended",
-        "prettier/vue"
+        "prettier/vue",
+        "plugin:prettier/recommended"
     ],
     "rules": {
         "no-console": 0,
