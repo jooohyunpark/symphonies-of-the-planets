@@ -12,6 +12,7 @@
     "format": "eslint ./components/** ./pages/** -c .eslintrc --fix --ext vue"
   },
   "dependencies": {
+    "gsap": "^3.2.6",
     "node-sass": "^4.14.1",
     "nuxt": "^2.0.0",
     "sass-loader": "^8.0.2"

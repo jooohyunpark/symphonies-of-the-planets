@@ -3,12 +3,12 @@
     <div class="panel-group">
       <div v-for="i in row" :key="_computed(i)" class="row">
         <div
-          class="column"
           v-for="j in column"
-          :key="_computed(j)"
           :id="`${_computed(i)}${_computed(j)}`"
+          :key="_computed(j)"
+          class="column"
         >
-          <Panel :size="80" />
+          <Panel :size="80" :on="true" />
         </div>
       </div>
     </div>
@@ -23,14 +23,14 @@ export default {
   data() {
     return {
       row: 10,
-      column: 10,
+      column: 10
     }
   },
   methods: {
     _computed(val) {
       return val - 1
-    },
-  },
+    }
+  }
 }
 </script>
 

@@ -11,7 +11,7 @@
         "parser": "babel-eslint"
     },
     "extends": [
-        "plugin:vue/essential",
+        "plugin:vue/recommended",
         "eslint:recommended",
         "prettier/vue",
         "plugin:prettier/recommended"
