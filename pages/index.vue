@@ -35,6 +35,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/style/_colors.scss';
+
 .container {
   width: 100vw;
   height: 100vh;
@@ -42,7 +44,7 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: #181818;
+  background: $color-background;
 }
 .row {
   display: flex;
