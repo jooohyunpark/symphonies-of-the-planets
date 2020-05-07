@@ -4,13 +4,13 @@
     class="panel"
     :style="{ width: size + 'px', height: size + 'px' }"
   >
-    <Orbit />
+    <Orbit :id="id" />
   </div>
 </template>
 
 <script>
-import Orbit from '@/components/svg/Orbit'
 import gsap from 'gsap'
+import Orbit from '@/components/Orbit'
 
 export default {
   components: {
@@ -24,8 +24,16 @@ export default {
     on: {
       type: Boolean,
       default: true
+    },
+    duration: {
+      type: Number,
+      default: 0.3
     }
   },
+  data() {
+    return {}
+  },
+
   mounted() {
     // if (this.on) {
     //   gsap.to(this.$refs.panel, 60 * Math.random(), {
@@ -35,12 +43,15 @@ export default {
     //     repeat: -1
     //   })
     // }
-  }
+  },
+  methods: {}
 }
 </script>
 
 <style lang="scss" scoped>
 .panel {
+  position: relative;
+  padding: 8px;
   // border: 1px solid gray;
 }
 </style>

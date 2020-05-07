@@ -11,10 +11,10 @@
         "parser": "babel-eslint"
     },
     "extends": [
-        "plugin:prettier/recommended",
         "plugin:vue/recommended",
         "eslint:recommended",
-        "prettier/vue"
+        "prettier/vue",
+        "plugin:prettier/recommended"
     ],
     "rules": {
         "no-console": 0,

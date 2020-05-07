@@ -1,14 +1,9 @@
 <template>
   <div class="container">
     <div class="panel-group">
-      <div v-for="i in row" :key="_computed(i)" class="row">
-        <div
-          v-for="j in column"
-          :id="`${_computed(i)}${_computed(j)}`"
-          :key="_computed(j)"
-          class="column"
-        >
-          <Panel :size="80" :on="true" />
+      <div v-for="i in row" :key="i" class="row">
+        <div v-for="j in column" :id="id(i, j)" :key="j" class="column">
+          <Panel :size="150" :on="true" />
         </div>
       </div>
     </div>
@@ -22,21 +17,19 @@ export default {
   components: { Panel },
   data() {
     return {
-      row: 10,
-      column: 10
+      row: 5,
+      column: 5
     }
   },
   methods: {
-    _computed(val) {
-      return val - 1
+    id(i, j) {
+      return `${i - 1}${j - 1}`
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/style/_colors.scss';
-
 .container {
   width: 100vw;
   height: 100vh;
@@ -44,9 +37,10 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: $color-background;
-}
-.row {
-  display: flex;
+  background: #181818;
+
+  .row {
+    display: flex;
+  }
 }
 </style>

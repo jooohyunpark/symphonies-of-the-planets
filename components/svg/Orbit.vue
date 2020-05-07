@@ -14,10 +14,4 @@
   </svg>
 </template>
 
-<style lang="scss" scoped>
-@import '@/assets/style/_colors.scss';
-
-#oval {
-  fill: $color-background;
-}
-</style>
+<style lang="scss" scoped></style>
