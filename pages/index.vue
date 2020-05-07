@@ -3,7 +3,7 @@
     <div class="panel-group">
       <div v-for="i in row" :key="i" class="row">
         <div v-for="j in column" :id="id(i, j)" :key="j" class="column">
-          <Panel :size="150" :on="true" :duration="Math.random()" />
+          <Panel :size="120" :on="true" :duration="Math.random()" />
         </div>
       </div>
     </div>
@@ -30,6 +30,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/style/_colors.scss';
+
 .container {
   width: 100vw;
   height: 100vh;
@@ -37,7 +39,7 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: #181818;
+  background: $bg-color;
 
   .row {
     display: flex;

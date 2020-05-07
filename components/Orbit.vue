@@ -1,5 +1,5 @@
 <template>
-  <svg class="orbit" width="100%" height="100%" viewBox="0 0 100 100">
+  <svg width="100%" height="100%" viewBox="0 0 100 100">
     <circle
       ref="orbit"
       :r="orbitRadius"
@@ -11,14 +11,32 @@
       :style="{ strokeDashoffset: circumference }"
     />
     <circle
+      :r="orbitRadius"
+      :stroke="color"
+      :stroke-width="strokeWidth"
+      stroke-opacity="0.1"
+      fill="none"
+      cx="50"
+      cy="50"
+    />
+    <circle
       ref="planet"
+      class="planet"
       :r="planetRadius"
       :stroke="color"
       :stroke-width="strokeWidth"
-      fill="none"
       :cx="planet_cx"
       :cy="planet_cy"
     />
+    <!-- <line
+      x1="50"
+      :y1="50 - orbitRadius - lineLength / 2"
+      x2="50"
+      :y2="50 - orbitRadius + lineLength / 2"
+      :stroke="color"
+      :stroke-width="strokeWidth"
+      stroke-linecap="square"
+    />-->
   </svg>
 </template>
 
@@ -39,7 +57,7 @@ export default {
     },
     color: {
       type: String,
-      default: '#fff'
+      default: '#ccc'
     },
     progress: {
       type: Number,
@@ -49,6 +67,7 @@ export default {
   data() {
     return {
       circumference: this.orbitRadius * 2 * Math.PI
+      // lineLength: 2
     }
   },
   computed: {
@@ -70,9 +89,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/style/_colors.scss';
+
 circle {
   transition: 0.3s stroke-dashoffset;
   transform: rotate(-90deg);
   transform-origin: 50% 50%;
+}
+
+.planet {
+  fill: $bg-color;
 }
 </style>

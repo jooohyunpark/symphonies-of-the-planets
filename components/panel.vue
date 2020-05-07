@@ -1,20 +1,23 @@
 <template>
-  <div
-    ref="panel"
-    class="panel"
-    :style="{ width: size + 'px', height: size + 'px' }"
-  >
-    <Orbit :progress="duration" />
+  <div class="panel" :style="{ width: size + 'px', height: size + 'px' }">
+    <div ref="orbit" class="orbit">
+      <Orbit :progress="duration" />
+    </div>
+    <div class="trigger">
+      <Trigger />
+    </div>
   </div>
 </template>
 
 <script>
 import gsap from 'gsap'
 import Orbit from '@/components/Orbit'
+import Trigger from '@/components/Trigger'
 
 export default {
   components: {
-    Orbit
+    Orbit,
+    Trigger
   },
   props: {
     size: {
@@ -35,14 +38,14 @@ export default {
   },
 
   mounted() {
-    // if (this.on) {
-    //   gsap.to(this.$refs.panel, 60 * Math.random(), {
-    //     rotation: 360,
-    //     transformOrigin: 'center',
-    //     ease: 'none',
-    //     repeat: -1
-    //   })
-    // }
+    if (this.on) {
+      gsap.to(this.$refs.orbit, 60 * Math.random(), {
+        rotation: 360,
+        transformOrigin: 'center',
+        ease: 'none',
+        repeat: -1
+      })
+    }
   },
   methods: {}
 }
@@ -51,7 +54,19 @@ export default {
 <style lang="scss" scoped>
 .panel {
   position: relative;
-  padding: 8px;
-  border: 1px solid pink;
+  padding: 16px;
+  border: 1px solid #333;
+
+  .orbit {
+    width: 100%;
+    height: 100%;
+  }
+
+  .trigger {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 16px;
+  }
 }
 </style>
