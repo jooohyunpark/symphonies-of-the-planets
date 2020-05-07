@@ -3,7 +3,7 @@
     <div class="panel-group">
       <div v-for="i in row" :key="i" class="row">
         <div v-for="j in column" :id="id(i, j)" :key="j" class="column">
-          <Panel :size="150" :on="true" />
+          <Panel :size="150" :on="true" :duration="Math.random()" />
         </div>
       </div>
     </div>

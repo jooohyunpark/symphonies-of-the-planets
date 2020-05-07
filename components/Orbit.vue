@@ -1,9 +1,8 @@
 <template>
-  <svg width="100%" height="100%" viewBox="0 0 100 100">
+  <svg class="orbit" width="100%" height="100%" viewBox="0 0 100 100">
     <circle
       ref="orbit"
-      class="orbit"
-      :r="r"
+      :r="orbitRadius"
       :stroke="color"
       :stroke-width="strokeWidth"
       fill="none"
@@ -11,15 +10,28 @@
       cy="50"
       :style="{ strokeDashoffset: circumference }"
     />
+    <circle
+      ref="planet"
+      :r="planetRadius"
+      :stroke="color"
+      :stroke-width="strokeWidth"
+      fill="none"
+      :cx="planet_cx"
+      :cy="planet_cy"
+    />
   </svg>
 </template>
 
 <script>
 export default {
   props: {
-    r: {
+    orbitRadius: {
       type: Number,
       default: 40
+    },
+    planetRadius: {
+      type: Number,
+      default: 5
     },
     strokeWidth: {
       type: Number,
@@ -36,12 +48,18 @@ export default {
   },
   data() {
     return {
-      circumference: this.r * 2 * Math.PI
+      circumference: this.orbitRadius * 2 * Math.PI
     }
   },
   computed: {
     offset() {
       return (1 - this.progress) * this.circumference
+    },
+    planet_cx() {
+      return 50 + this.orbitRadius * Math.cos(2 * Math.PI * this.progress)
+    },
+    planet_cy() {
+      return 50 + this.orbitRadius * Math.sin(2 * Math.PI * this.progress)
     }
   },
   mounted() {
@@ -53,7 +71,7 @@ export default {
 
 <style lang="scss" scoped>
 circle {
-  transition: 0.35s stroke-dashoffset;
+  transition: 0.3s stroke-dashoffset;
   transform: rotate(-90deg);
   transform-origin: 50% 50%;
 }

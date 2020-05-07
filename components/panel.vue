@@ -4,7 +4,7 @@
     class="panel"
     :style="{ width: size + 'px', height: size + 'px' }"
   >
-    <Orbit :id="id" />
+    <Orbit :progress="duration" />
   </div>
 </template>
 
@@ -27,7 +27,7 @@ export default {
     },
     duration: {
       type: Number,
-      default: 0.3
+      default: 1
     }
   },
   data() {
@@ -52,6 +52,6 @@ export default {
 .panel {
   position: relative;
   padding: 8px;
-  // border: 1px solid gray;
+  border: 1px solid pink;
 }
 </style>
