@@ -9,6 +9,15 @@
       :stroke-width="strokeWidth"
       stroke-linecap="square"
     />
+    <circle
+      :r="orbitRadius"
+      :stroke="color"
+      :stroke-width="strokeWidth"
+      stroke-opacity="0.1"
+      fill="none"
+      cx="50"
+      cy="50"
+    />
   </svg>
 </template>
 

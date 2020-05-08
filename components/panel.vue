@@ -1,7 +1,11 @@
 <template>
-  <div class="panel" :style="{ width: size + 'px', height: size + 'px' }">
+  <div
+    class="panel"
+    :style="{ width: size + 'px', height: size + 'px' }"
+    @click="onClick"
+  >
     <div ref="orbit" class="orbit">
-      <Orbit :progress="duration" />
+      <Orbit :progress="data.duration" />
     </div>
     <div class="trigger">
       <Trigger />
@@ -10,9 +14,9 @@
 </template>
 
 <script>
-import gsap from 'gsap'
 import Orbit from '@/components/Orbit'
 import Trigger from '@/components/Trigger'
+import gsap from 'gsap'
 
 export default {
   components: {
@@ -22,32 +26,41 @@ export default {
   props: {
     size: {
       type: Number,
-      default: 100
+      default: 120
     },
-    on: {
-      type: Boolean,
-      default: true
-    },
-    duration: {
-      type: Number,
-      default: 1
+    data: {
+      type: Object,
+      default: () => {}
     }
   },
   data() {
-    return {}
-  },
-
-  mounted() {
-    if (this.on) {
-      gsap.to(this.$refs.orbit, 60 * Math.random(), {
-        rotation: 360,
-        transformOrigin: 'center',
-        ease: 'none',
-        repeat: -1
-      })
+    return {
+      play: true,
+      gsap_obj: null
     }
   },
-  methods: {}
+  watch: {
+    play() {
+      if (this.play) this.gsap_obj.play()
+      else this.gsap_obj.pause()
+    }
+  },
+  mounted() {
+    this.gsap_obj = gsap.to(this.$refs.orbit, 60 * Math.random(), {
+      rotation: 360,
+      transformOrigin: 'center',
+      ease: 'none',
+      repeat: -1
+    })
+  },
+  destroyed() {
+    this.gsap_obj.kill()
+  },
+  methods: {
+    onClick() {
+      this.play = !this.play
+    }
+  }
 }
 </script>
 

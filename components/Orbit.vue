@@ -11,15 +11,6 @@
       :style="{ strokeDashoffset: circumference }"
     />
     <circle
-      :r="orbitRadius"
-      :stroke="color"
-      :stroke-width="strokeWidth"
-      stroke-opacity="0.1"
-      fill="none"
-      cx="50"
-      cy="50"
-    />
-    <circle
       ref="planet"
       class="planet"
       :r="planetRadius"
@@ -28,15 +19,6 @@
       :cx="planet_cx"
       :cy="planet_cy"
     />
-    <!-- <line
-      x1="50"
-      :y1="50 - orbitRadius - lineLength / 2"
-      x2="50"
-      :y2="50 - orbitRadius + lineLength / 2"
-      :stroke="color"
-      :stroke-width="strokeWidth"
-      stroke-linecap="square"
-    />-->
   </svg>
 </template>
 
