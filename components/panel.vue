@@ -6,13 +6,13 @@
       @click="onClick"
     >
       <div ref="orbit" class="orbit">
-        <Orbit :progress="data.duration" />
+        <Orbit :progress="Math.random()" />
       </div>
       <div class="trigger">
         <Trigger />
       </div>
     </div>
-    <div class="title">test</div>
+    <div class="title">{{ data.pl_name }}</div>
   </div>
 </template>
 
@@ -74,12 +74,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$padding: 18px;
+
 .panel-container {
   // border: 1px solid #333;
 
   .panel {
     position: relative;
-    padding: 16px;
+    padding: $padding;
     // border-bottom: 1px solid #333;
 
     .orbit {
@@ -91,15 +93,15 @@ export default {
       position: absolute;
       top: 0;
       left: 0;
-      padding: 16px;
+      padding: $padding;
     }
   }
 
   .title {
     width: 100%;
     height: 100%;
-    line-height: 24px;
-    // padding-bottom: 16px;
+    // line-height: 24px;
+    padding-bottom: $padding;
     color: #fff;
     text-align: center;
     font-size: 0.8rem;

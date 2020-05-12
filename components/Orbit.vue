@@ -49,7 +49,6 @@ export default {
   data() {
     return {
       circumference: this.orbitRadius * 2 * Math.PI
-      // lineLength: 2
     }
   },
   computed: {
