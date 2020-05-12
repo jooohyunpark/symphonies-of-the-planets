@@ -17,6 +17,7 @@
 import Orbit from '@/components/Orbit'
 import Trigger from '@/components/Trigger'
 import gsap from 'gsap'
+// import * as Tone from 'tone'
 
 export default {
   components: {
@@ -52,6 +53,9 @@ export default {
       ease: 'none',
       repeat: -1
     })
+
+    // let synth = new Tone.Synth().toMaster()
+    // synth.triggerAttackRelease('C4', '8n')
   },
   destroyed() {
     this.gsap_obj.kill()
