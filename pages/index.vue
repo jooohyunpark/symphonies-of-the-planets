@@ -17,8 +17,8 @@ export default {
   components: { Panel },
   data() {
     return {
-      row: 5,
-      column: 5,
+      row: 4,
+      column: 6,
       data: {
         duration: Math.random()
       }
