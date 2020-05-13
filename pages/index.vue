@@ -12,7 +12,7 @@
 
 <script>
 import Panel from '@/components/Panel'
-import data from '@/data/data.json'
+import data from '@/data/planets.json'
 
 export default {
   components: { Panel },

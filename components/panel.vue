@@ -6,7 +6,7 @@
       @click="onClick"
     >
       <div ref="orbit" class="orbit">
-        <Orbit :progress="Math.random()" />
+        <Orbit :progress="computed_orbit(data.pl_orbper)" />
       </div>
       <div class="trigger">
         <Trigger />
@@ -45,29 +45,35 @@ export default {
   },
   watch: {
     play() {
-      if (this.play) this.gsap_obj.play()
-      else this.gsap_obj.pause()
+      this.toggle()
     }
   },
   mounted() {
-    if (this.play) {
-      this.gsap_obj = gsap.to(this.$refs.orbit, 60 * Math.random(), {
-        rotation: 360,
-        transformOrigin: 'center',
-        ease: 'none',
-        repeat: -1
-      })
-    }
+    this.gsap_obj = gsap.to(this.$refs.orbit, 60 * Math.random(), {
+      rotation: 360,
+      transformOrigin: 'center',
+      ease: 'none',
+      repeat: -1
+    })
+
+    this.toggle()
 
     // let synth = new Tone.Synth().toMaster()
     // synth.triggerAttackRelease('C4', '8n')
   },
   destroyed() {
-    this.gsap_obj.kill()
+    if (this.gsap_obj) this.gsap_obj.kill()
   },
   methods: {
     onClick() {
       this.play = !this.play
+    },
+    toggle() {
+      if (this.play) this.gsap_obj.play()
+      else this.gsap_obj.pause()
+    },
+    computed_orbit(val) {
+      return Math.min(val / 365, 1)
     }
   }
 }
