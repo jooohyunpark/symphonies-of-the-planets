@@ -1,5 +1,14 @@
 [
   {
+    "pl_name": "Earth",
+    "pl_orbper": 365,
+    "pl_bmassj": 0.003,
+    "pl_radj": 0.0892,
+    "st_dist": 0,
+    "st_teff": 265,
+    "pl_facility": "ddd"
+  },
+  {
     "pl_name": "11 Com b",
     "pl_orbper": 326.03,
     "pl_bmassj": 19.4,

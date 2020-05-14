@@ -3,10 +3,10 @@
     <div
       class="panel"
       :style="{ width: size + 'px', height: size + 'px' }"
-      @click="onClick"
+      @click="() => (play = !play)"
     >
-      <div ref="orbit" class="orbit">
-        <Orbit :progress="computed_orbit(data.pl_orbper)" />
+      <div ref="orbit" class="orbit animation">
+        <Orbit :progress="computed_pl_radj(data.pl_radj)" />
       </div>
       <div class="trigger">
         <Trigger />
@@ -19,7 +19,6 @@
 <script>
 import Orbit from '@/components/Orbit'
 import Trigger from '@/components/Trigger'
-import gsap from 'gsap'
 // import * as Tone from 'tone'
 
 export default {
@@ -35,11 +34,15 @@ export default {
     data: {
       type: Object,
       default: () => {}
+    },
+    info: {
+      type: Object,
+      default: () => {}
     }
   },
   data() {
     return {
-      play: false,
+      play: true,
       gsap_obj: null
     }
   },
@@ -49,12 +52,8 @@ export default {
     }
   },
   mounted() {
-    this.gsap_obj = gsap.to(this.$refs.orbit, 60 * Math.random(), {
-      rotation: 360,
-      transformOrigin: 'center',
-      ease: 'none',
-      repeat: -1
-    })
+    this.$refs.orbit.style.animationDuration =
+      this.computed_pl_orbper(this.data.pl_orbper) + 's'
 
     this.toggle()
 
@@ -65,15 +64,18 @@ export default {
     if (this.gsap_obj) this.gsap_obj.kill()
   },
   methods: {
-    onClick() {
-      this.play = !this.play
-    },
     toggle() {
-      if (this.play) this.gsap_obj.play()
-      else this.gsap_obj.pause()
+      if (this.play) this.$refs.orbit.style.animationPlayState = 'running'
+      else this.$refs.orbit.style.animationPlayState = 'paused'
     },
-    computed_orbit(val) {
-      return Math.min(val / 365, 1)
+    computed_pl_orbper(val) {
+      return (val / 365) * 60 * 10
+    },
+    computed_pl_radj(val) {
+      return val / this.info.pl_radj_max
+    },
+    computed_pl_bmassj(val) {
+      return val / this.info.pl_bmassj_max
     }
   }
 }
@@ -111,6 +113,29 @@ $padding: 18px;
     color: #fff;
     text-align: center;
     font-size: 0.8rem;
+  }
+}
+
+.animation {
+  -webkit-animation: spin linear infinite;
+  -moz-animation: spin linear infinite;
+  animation: spin linear infinite;
+
+  @-moz-keyframes spin {
+    100% {
+      -moz-transform: rotate(360deg);
+    }
+  }
+  @-webkit-keyframes spin {
+    100% {
+      -webkit-transform: rotate(360deg);
+    }
+  }
+  @keyframes spin {
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
   }
 }
 </style>
