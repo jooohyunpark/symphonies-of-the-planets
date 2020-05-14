@@ -42,7 +42,7 @@ export default {
   },
   data() {
     return {
-      play: true,
+      play: false,
       gsap_obj: null
     }
   },
@@ -52,18 +52,18 @@ export default {
     }
   },
   mounted() {
-    this.$refs.orbit.style.animationDuration =
-      this.computed_pl_orbper(this.data.pl_orbper) + 's'
-
+    this.init_duration()
     this.toggle()
 
     // let synth = new Tone.Synth().toMaster()
     // synth.triggerAttackRelease('C4', '8n')
   },
-  destroyed() {
-    if (this.gsap_obj) this.gsap_obj.kill()
-  },
+  destroyed() {},
   methods: {
+    init_duration() {
+      this.$refs.orbit.style.animationDuration =
+        this.computed_pl_orbper(this.data.pl_orbper) + 's'
+    },
     toggle() {
       if (this.play) this.$refs.orbit.style.animationPlayState = 'running'
       else this.$refs.orbit.style.animationPlayState = 'paused'
