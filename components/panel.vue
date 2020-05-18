@@ -42,8 +42,7 @@ export default {
   },
   data() {
     return {
-      play: false,
-      gsap_obj: null
+      play: false
     }
   },
   watch: {

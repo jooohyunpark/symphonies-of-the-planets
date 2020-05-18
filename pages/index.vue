@@ -28,10 +28,7 @@ export default {
     console.log('original data size: ', data.length)
 
     const _data = data.filter(d => {
-      return (
-        (d.pl_name && d.pl_radj && d.pl_bmassj && d.pl_orbper && d.st_dist) !==
-        null
-      )
+      return (d.pl_name && d.pl_radj && d.pl_orbper && d.st_dist) !== null
     })
 
     console.log('filtered data size: ', _data.length)
