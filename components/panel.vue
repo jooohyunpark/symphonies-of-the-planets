@@ -1,10 +1,6 @@
 <template>
   <div class="panel-container">
-    <div
-      class="panel"
-      :style="{ width: size + 'px', height: size + 'px' }"
-      @click="() => (play = !play)"
-    >
+    <div class="panel" :style="{ width: size + 'px', height: size + 'px' }">
       <div ref="orbit" class="orbit animation">
         <Orbit :progress="computed_pl_radj(data.pl_radj)" />
       </div>
@@ -41,18 +37,10 @@ export default {
     }
   },
   data() {
-    return {
-      play: false
-    }
-  },
-  watch: {
-    play() {
-      this.toggle()
-    }
+    return {}
   },
   mounted() {
     this.init_duration()
-    this.toggle()
 
     // let synth = new Tone.Synth().toMaster()
     // synth.triggerAttackRelease('C4', '8n')
@@ -63,12 +51,8 @@ export default {
       this.$refs.orbit.style.animationDuration =
         this.computed_pl_orbper(this.data.pl_orbper) + 's'
     },
-    toggle() {
-      if (this.play) this.$refs.orbit.style.animationPlayState = 'running'
-      else this.$refs.orbit.style.animationPlayState = 'paused'
-    },
     computed_pl_orbper(val) {
-      return (val / 365) * 60 * 10
+      return (val / 365) * 60 * 20
     },
     computed_pl_radj(val) {
       return val / this.info.pl_radj_max

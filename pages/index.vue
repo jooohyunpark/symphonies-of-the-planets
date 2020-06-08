@@ -3,7 +3,7 @@
     <div class="panel-group">
       <div v-for="i in row" :key="i" class="row">
         <div v-for="j in column" :id="id(i, j)" :key="j" class="column">
-          <Panel :data="data[i - 1][j - 1]" :info="info" />
+          <Panel :data="data[i - 1][j - 1]" :info="info" :size="size" />
         </div>
       </div>
     </div>
@@ -20,6 +20,7 @@ export default {
     return {
       row: 4,
       column: 6,
+      size: 120,
       data: [],
       info: {}
     }
