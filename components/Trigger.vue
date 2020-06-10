@@ -39,7 +39,7 @@ export default {
   },
   data() {
     return {
-      lineLength: 3
+      lineLength: 2
     }
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="panel-container">
     <div class="panel" :style="{ width: size + 'px', height: size + 'px' }">
-      <div ref="orbit" class="orbit animation">
+      <div ref="orbit" class="orbit ">
         <Orbit :progress="computed_pl_radj(data.pl_radj)" />
       </div>
       <div class="trigger">
@@ -9,7 +9,6 @@
       </div>
       <div class="title">{{ data.pl_name }}</div>
     </div>
-    <!-- <div class="title">{{ data.pl_name }}</div> -->
   </div>
 </template>
 
@@ -102,16 +101,6 @@ $padding: 24px;
       font-size: 0.8rem;
     }
   }
-
-  // .title {
-  //   width: 100%;
-  //   height: 100%;
-  //   // line-height: 24px;
-  //   padding-bottom: $padding;
-  //   color: #fff;
-  //   text-align: center;
-  //   font-size: 0.8rem;
-  // }
 }
 
 .animation {
