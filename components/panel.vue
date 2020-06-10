@@ -7,8 +7,9 @@
       <div class="trigger">
         <Trigger />
       </div>
+      <div class="title">{{ data.pl_name }}</div>
     </div>
-    <div class="title">{{ data.pl_name }}</div>
+    <!-- <div class="title">{{ data.pl_name }}</div> -->
   </div>
 </template>
 
@@ -65,7 +66,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$padding: 18px;
+$padding: 24px;
 
 .panel-container {
   // border: 1px solid #333;
@@ -86,17 +87,31 @@ $padding: 18px;
       left: 0;
       padding: $padding;
     }
+
+    .title {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      color: #ccc;
+      font-size: 0.8rem;
+    }
   }
 
-  .title {
-    width: 100%;
-    height: 100%;
-    // line-height: 24px;
-    padding-bottom: $padding;
-    color: #fff;
-    text-align: center;
-    font-size: 0.8rem;
-  }
+  // .title {
+  //   width: 100%;
+  //   height: 100%;
+  //   // line-height: 24px;
+  //   padding-bottom: $padding;
+  //   color: #fff;
+  //   text-align: center;
+  //   font-size: 0.8rem;
+  // }
 }
 
 .animation {

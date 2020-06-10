@@ -20,7 +20,7 @@ export default {
     return {
       row: 4,
       column: 6,
-      size: 120,
+      size: 160,
       data: [],
       info: {}
     }

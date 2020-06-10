@@ -6,14 +6,14 @@
       x2="50"
       :y2="50 - orbitRadius + lineLength / 2"
       :stroke="color"
-      :stroke-width="strokeWidth"
+      :stroke-width="strokeWidth / 2"
       stroke-linecap="square"
     />
     <circle
       :r="orbitRadius"
       :stroke="color"
       :stroke-width="strokeWidth"
-      stroke-opacity="0.1"
+      stroke-opacity="0.03"
       fill="none"
       cx="50"
       cy="50"
@@ -39,7 +39,7 @@ export default {
   },
   data() {
     return {
-      lineLength: 2
+      lineLength: 3
     }
   }
 }

@@ -10,15 +10,6 @@
       cy="50"
       :style="{ strokeDashoffset: circumference }"
     />
-    <circle
-      ref="planet"
-      class="planet"
-      :r="planetRadius"
-      :stroke="color"
-      :stroke-width="strokeWidth"
-      :cx="planet_cx"
-      :cy="planet_cy"
-    />
   </svg>
 </template>
 
@@ -28,10 +19,6 @@ export default {
     orbitRadius: {
       type: Number,
       default: 40
-    },
-    planetRadius: {
-      type: Number,
-      default: 5
     },
     strokeWidth: {
       type: Number,
@@ -54,12 +41,6 @@ export default {
   computed: {
     offset() {
       return (1 - this.progress) * this.circumference
-    },
-    planet_cx() {
-      return 50 + this.orbitRadius * Math.cos(2 * Math.PI * this.progress)
-    },
-    planet_cy() {
-      return 50 + this.orbitRadius * Math.sin(2 * Math.PI * this.progress)
     }
   },
   mounted() {
@@ -76,9 +57,5 @@ circle {
   transition: 0.3s stroke-dashoffset;
   transform: rotate(-90deg);
   transform-origin: 50% 50%;
-}
-
-.planet {
-  fill: $bg-color;
 }
 </style>
