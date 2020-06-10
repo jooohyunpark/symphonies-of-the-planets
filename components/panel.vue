@@ -1,13 +1,17 @@
 <template>
   <div class="panel-container">
     <div class="panel" :style="{ width: size + 'px', height: size + 'px' }">
-      <div ref="orbit" class="orbit ">
+      <div ref="orbit" class="orbit animation">
         <Orbit :progress="computed_pl_radj(data.pl_radj)" />
       </div>
       <div class="trigger">
         <Trigger />
       </div>
-      <div class="title">{{ data.pl_name }}</div>
+      <div class="title">
+        <span>
+          {{ data.pl_name }}
+        </span>
+      </div>
     </div>
   </div>
 </template>
@@ -52,7 +56,7 @@ export default {
         this.computed_pl_orbper(this.data.pl_orbper) + 's'
     },
     computed_pl_orbper(val) {
-      return (val / 365) * 60 * 20
+      return (val / 365) * 60 * 60
     },
     computed_pl_radj(val) {
       return val / this.info.pl_radj_max
@@ -96,9 +100,16 @@ $padding: 24px;
       display: flex;
       flex-direction: column;
       justify-content: center;
+      align-items: center;
       text-align: center;
+
       color: #ccc;
       font-size: 0.8rem;
+
+      span {
+        width: 50%;
+        overflow-wrap: break-word;
+      }
     }
   }
 }

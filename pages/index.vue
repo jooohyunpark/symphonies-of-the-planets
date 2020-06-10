@@ -19,7 +19,7 @@ export default {
   data() {
     return {
       row: 4,
-      column: 6,
+      column: 4,
       size: 160,
       data: [],
       info: {}
