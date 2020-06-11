@@ -1,5 +1,5 @@
 <template>
-  <div class="panel-container">
+  <div class="panel-container" @click="play">
     <div class="panel" :style="{ width: size + 'px', height: size + 'px' }">
       <div ref="orbit" class="orbit animation">
         <Orbit :progress="computed_pl_radj(data.pl_radj)" />
@@ -19,7 +19,9 @@
 <script>
 import Orbit from '@/components/Orbit'
 import Trigger from '@/components/Trigger'
-// import * as Tone from 'tone'
+import * as Tone from 'tone'
+// import A2 from '@/assets/sounds/A2.mp3'
+// import piano from '@/components/test.js'
 
 export default {
   components: {
@@ -41,13 +43,26 @@ export default {
     }
   },
   data() {
-    return {}
+    return {
+      synth: null
+    }
   },
   mounted() {
     this.init_duration()
 
-    // let synth = new Tone.Synth().toMaster()
-    // synth.triggerAttackRelease('C4', '8n')
+    // console.log(this.$refs.orbit.style)
+
+    // this.synth = new Tone.Synth({
+    //   oscillator: {
+    //     type: 'sine'
+    //   },
+    //   envelope: {
+    //     attack: 0.005,
+    //     decay: 0.1,
+    //     sustain: 0.3,
+    //     release: 1
+    //   }
+    // }).toMaster()
   },
   destroyed() {},
   methods: {
@@ -56,13 +71,16 @@ export default {
         this.computed_pl_orbper(this.data.pl_orbper) + 's'
     },
     computed_pl_orbper(val) {
-      return (val / 365) * 60 * 60
+      return (val / 365) * 60 * 10
     },
     computed_pl_radj(val) {
       return val / this.info.pl_radj_max
     },
     computed_pl_bmassj(val) {
       return val / this.info.pl_bmassj_max
+    },
+    play(note, duration) {
+      this.synth.triggerAttackRelease('C3', 8)
     }
   }
 }
