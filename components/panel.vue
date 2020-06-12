@@ -1,16 +1,14 @@
 <template>
-  <div class="panel-container" @click="play">
+  <div class="panel-container">
     <div class="panel" :style="{ width: size + 'px', height: size + 'px' }">
       <div ref="orbit" class="orbit animation">
-        <Orbit :progress="computed_pl_radj(data.pl_radj)" />
+        <Orbit :progress="progress" />
       </div>
       <div class="trigger">
         <Trigger />
       </div>
       <div class="title">
-        <span>
-          {{ data.pl_name }}
-        </span>
+        <span>{{ data.pl_name }}</span>
       </div>
     </div>
   </div>
@@ -44,43 +42,48 @@ export default {
   },
   data() {
     return {
-      synth: null
+      piano: null
+    }
+  },
+  computed: {
+    cycleDuration() {
+      return (this.data.pl_orbper / 365) * 60 * 10
+    },
+    progress() {
+      return this.data.pl_radj / this.info.pl_radj_max
+    },
+    playDuration() {
+      return this.cycleDuration * this.progress
     }
   },
   mounted() {
-    this.init_duration()
+    this.set_css_duration()
+    this.init_piano()
 
-    // console.log(this.$refs.orbit.style)
-
-    // this.synth = new Tone.Synth({
-    //   oscillator: {
-    //     type: 'sine'
-    //   },
-    //   envelope: {
-    //     attack: 0.005,
-    //     decay: 0.1,
-    //     sustain: 0.3,
-    //     release: 1
-    //   }
-    // }).toMaster()
+    this.$refs.orbit.addEventListener('webkitAnimationIteration', this.play)
   },
-  destroyed() {},
+  beforeDestroy() {
+    this.$refs.orbit.removeEventListener('webkitAnimationIteration', this.play)
+  },
   methods: {
-    init_duration() {
-      this.$refs.orbit.style.animationDuration =
-        this.computed_pl_orbper(this.data.pl_orbper) + 's'
+    set_css_duration() {
+      this.$refs.orbit.style.animationDuration = this.cycleDuration + 's'
     },
-    computed_pl_orbper(val) {
-      return (val / 365) * 60 * 10
+    init_piano() {
+      this.piano = new Tone.Synth({
+        oscillator: {
+          type: 'sine'
+        },
+        envelope: {
+          attack: 0.005,
+          decay: 0.1,
+          sustain: 0.3,
+          release: 1
+        }
+      }).toMaster()
     },
-    computed_pl_radj(val) {
-      return val / this.info.pl_radj_max
-    },
-    computed_pl_bmassj(val) {
-      return val / this.info.pl_bmassj_max
-    },
-    play(note, duration) {
-      this.synth.triggerAttackRelease('C3', 8)
+    play() {
+      this.piano.triggerAttackRelease('C3', this.playDuration)
     }
   }
 }

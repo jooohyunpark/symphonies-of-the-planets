@@ -1,5 +1,5 @@
 <template>
-  <svg width="100%" height="100%" viewBox="0 0 100 100">
+  <svg ref="svg" width="100%" height="100%" viewBox="0 0 100 100">
     <circle
       ref="orbit"
       :r="orbitRadius"
@@ -44,8 +44,20 @@ export default {
     }
   },
   mounted() {
+    this.init_transform_offset()
     this.$refs.orbit.style.strokeDasharray = `${this.circumference} ${this.circumference}`
     this.$refs.orbit.style.strokeDashoffset = this.offset
+  },
+  methods: {
+    init_transform_offset() {
+      this.$refs.svg.setAttribute(
+        'style',
+        `transform: rotate(${-1 * this.progress * 360}deg);
+        -webkit-transform: rotate(${-1 * this.progress * 360}deg);
+        -moz-transform: rotate(${-1 * this.progress * 360}deg);
+          `
+      )
+    }
   }
 }
 </script>

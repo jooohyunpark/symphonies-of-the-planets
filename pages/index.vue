@@ -1,6 +1,6 @@
 <template>
-  <div class="app">
-    <div class="panel-group">
+  <div class="app" @click="state = true">
+    <div v-if="state" class="panel-group">
       <div v-for="i in row" :key="i" class="row">
         <div v-for="j in column" :id="id(i, j)" :key="j" class="column">
           <Panel :data="data[i - 1][j - 1]" :info="info" :size="size" />
@@ -22,7 +22,8 @@ export default {
       column: 1,
       size: 160,
       data: [],
-      info: {}
+      info: {},
+      state: false
     }
   },
   created() {
