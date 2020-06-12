@@ -47,7 +47,7 @@ export default {
   },
   computed: {
     cycleDuration() {
-      return (this.data.pl_orbper / 365) * 60 * 10
+      return (this.data.pl_orbper / 365) * 60 * 60
     },
     progress() {
       return this.data.pl_radj / this.info.pl_radj_max
@@ -57,16 +57,16 @@ export default {
     }
   },
   mounted() {
-    this.set_css_duration()
+    this.set_cycle_duration()
     this.init_piano()
 
-    this.$refs.orbit.addEventListener('webkitAnimationIteration', this.play)
+    // this.$refs.orbit.addEventListener('webkitAnimationIteration', this.play)
   },
   beforeDestroy() {
-    this.$refs.orbit.removeEventListener('webkitAnimationIteration', this.play)
+    // this.$refs.orbit.removeEventListener('webkitAnimationIteration', this.play)
   },
   methods: {
-    set_css_duration() {
+    set_cycle_duration() {
       this.$refs.orbit.style.animationDuration = this.cycleDuration + 's'
     },
     init_piano() {
