@@ -17,9 +17,8 @@
 <script>
 import Orbit from '@/components/Orbit'
 import Trigger from '@/components/Trigger'
-import * as Tone from 'tone'
-// import A2 from '@/assets/sounds/A2.mp3'
-// import piano from '@/components/test.js'
+import piano from '@/js/piano'
+import keys from '@/data/keys'
 
 export default {
   components: {
@@ -41,13 +40,11 @@ export default {
     }
   },
   data() {
-    return {
-      piano: null
-    }
+    return {}
   },
   computed: {
     cycleDuration() {
-      return (this.data.pl_orbper / 365) * 60 * 60
+      return (this.data.pl_orbper / 365) * 60 * 10
     },
     progress() {
       return this.data.pl_radj / this.info.pl_radj_max
@@ -58,32 +55,21 @@ export default {
   },
   mounted() {
     this.set_cycle_duration()
-    this.init_piano()
 
-    // this.$refs.orbit.addEventListener('webkitAnimationIteration', this.play)
+    this.$refs.orbit.addEventListener('webkitAnimationIteration', this.play)
   },
   beforeDestroy() {
-    // this.$refs.orbit.removeEventListener('webkitAnimationIteration', this.play)
+    this.$refs.orbit.removeEventListener('webkitAnimationIteration', this.play)
   },
   methods: {
     set_cycle_duration() {
       this.$refs.orbit.style.animationDuration = this.cycleDuration + 's'
     },
-    init_piano() {
-      this.piano = new Tone.Synth({
-        oscillator: {
-          type: 'sine'
-        },
-        envelope: {
-          attack: 0.005,
-          decay: 0.1,
-          sustain: 0.3,
-          release: 1
-        }
-      }).toMaster()
-    },
     play() {
-      this.piano.triggerAttackRelease('C3', this.playDuration)
+      piano.triggerAttackRelease(
+        keys[Math.floor(Math.random() * Math.floor(keys.length))],
+        this.playDuration
+      )
     }
   }
 }
