@@ -1,5 +1,5 @@
 import * as Tone from 'tone'
-import keys from '@/data/keys'
+import source_keys from '@/data/source_keys'
 
 let piano
 const path = {}
@@ -8,8 +8,8 @@ const computed_key = val => {
   return val.replace('#', 's')
 }
 
-keys.map(key => {
-  path[key] = require(`@/assets/salamander/${computed_key(key)}.mp3`)
+source_keys.map(key => {
+  path[key] = require(`@/assets/sounds/${computed_key(key)}.ogg`)
 })
 
 if (process.client) {

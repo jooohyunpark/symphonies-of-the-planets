@@ -18,8 +18,8 @@ export default {
   components: { Panel },
   data() {
     return {
-      row: 1,
-      column: 3,
+      row: 4,
+      column: 4,
       size: 160,
       data: [],
       info: {},
