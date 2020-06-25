@@ -1,7 +1,7 @@
 <template>
   <div class="panel-container">
     <div class="panel" :style="{ width: size + 'px', height: size + 'px' }">
-      <div ref="orbit" class="orbit animation">
+      <div ref="orbit" class="orbit" :class="start && 'animation'">
         <Orbit :progress="progress" />
       </div>
       <div class="trigger">
@@ -37,6 +37,10 @@ export default {
     info: {
       type: Object,
       default: () => {}
+    },
+    start: {
+      type: Boolean,
+      default: false
     }
   },
   data() {

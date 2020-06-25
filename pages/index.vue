@@ -1,9 +1,14 @@
 <template>
-  <div class="app" @click="state = true">
-    <div v-if="state" class="panel-group">
+  <div class="app" @click="start = true">
+    <div class="panel-group">
       <div v-for="i in row" :key="i" class="row">
         <div v-for="j in column" :id="id(i, j)" :key="j" class="column">
-          <Panel :data="data[i - 1][j - 1]" :info="info" :size="size" />
+          <Panel
+            :data="data[i - 1][j - 1]"
+            :info="info"
+            :size="size"
+            :start="start"
+          />
         </div>
       </div>
     </div>
@@ -18,19 +23,22 @@ export default {
   components: { Panel },
   data() {
     return {
-      row: 4,
-      column: 4,
-      size: 160,
+      row: Number(this.$route.query.row) || 1,
+      column: Number(this.$route.query.column) || 3,
+      size: Math.max(Number(this.$route.query.size) || 160, 120),
       data: [],
       info: {},
-      state: false
+      start: false
     }
   },
   created() {
     console.log('original data size: ', data.length)
 
     const _data = data.filter(d => {
-      return (d.pl_name && d.pl_radj && d.pl_orbper && d.st_dist) !== null
+      return (
+        (d.pl_name && d.pl_radj && d.pl_orbper && d.pl_bmassj && d.st_dist) !==
+        null
+      )
     })
 
     console.log('filtered data size: ', _data.length)
