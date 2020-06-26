@@ -17,7 +17,6 @@
 <script>
 import Orbit from '@/components/Orbit'
 import Trigger from '@/components/Trigger'
-import piano from '@/js/piano'
 import keys from '@/data/keys'
 
 export default {
@@ -28,7 +27,7 @@ export default {
   props: {
     size: {
       type: Number,
-      default: 120
+      default: 160
     },
     data: {
       type: Object,
@@ -41,6 +40,10 @@ export default {
     start: {
       type: Boolean,
       default: false
+    },
+    piano: {
+      type: Object,
+      default: () => {}
     }
   },
   data() {
@@ -70,7 +73,7 @@ export default {
       this.$refs.orbit.style.animationDuration = this.cycleDuration + 's'
     },
     play() {
-      piano.triggerAttackRelease(
+      this.piano.triggerAttackRelease(
         keys[Math.floor(Math.random() * Math.floor(keys.length))],
         this.playDuration
       )

@@ -8,7 +8,6 @@
       fill="none"
       cx="50"
       cy="50"
-      :style="{ strokeDashoffset: circumference }"
     />
   </svg>
 </template>
@@ -66,7 +65,7 @@ export default {
 @import '@/assets/style/_colors.scss';
 
 circle {
-  transition: 0.3s stroke-dashoffset;
+  transition: stroke-dashoffset 0.3s ease-in-out;
   transform: rotate(-90deg);
   transform-origin: 50% 50%;
 }
