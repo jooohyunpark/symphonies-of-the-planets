@@ -54,7 +54,7 @@ export default {
       return (this.data.pl_orbper / 365) * 60 * 10
     },
     progress() {
-      return this.data.pl_radj / this.info.pl_radj_max
+      return this.data.st_dist / this.info.st_dist_max
     },
     playDuration() {
       return this.cycleDuration * this.progress

@@ -41,10 +41,19 @@ export default {
     console.log('original data size: ', __data.length)
 
     let _data = __data.filter(d => {
-      return (d.pl_name && d.pl_radj && d.pl_orbper && d.st_dist) !== null
+      return (
+        (d.pl_name && d.pl_radj && d.pl_bmassj && d.pl_orbper && d.st_dist) !==
+        null
+      )
     })
 
-    console.log('filtered data size: ', _data.length)
+    //
+    _data = _data.filter(d => {
+      return 0.05 < d.pl_bmassj && d.pl_bmassj < 5
+    })
+    //
+
+    console.log('cleaned data size: ', _data.length)
 
     this.info = {
       pl_orbper_min: this.min(_data, 'pl_orbper'),
@@ -75,10 +84,10 @@ export default {
       this.data.push(row_data)
     }
 
-    const t = _data.filter(d => {
-      return d.pl_radj > 0.892
-    })
-    console.log(t.length)
+    // const t = _data.filter(d => {
+    //   return d.pl_radj > 0.892
+    // })
+    // console.log(t.length)
   },
   mounted() {
     console.log('data: ', this.data)
