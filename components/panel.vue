@@ -25,13 +25,13 @@ export default {
     Trigger
   },
   props: {
-    size: {
-      type: Number,
-      default: 160
-    },
     data: {
       type: Object,
       default: () => {}
+    },
+    size: {
+      type: Number,
+      default: 160
     },
     info: {
       type: Object,
@@ -44,17 +44,26 @@ export default {
     piano: {
       type: Object,
       default: () => {}
+    },
+    time: {
+      type: Number,
+      default: 60
     }
-  },
-  data() {
-    return {}
   },
   computed: {
     cycleDuration() {
-      return (this.data.pl_orbper / 365) * 60 * 10
+      return (this.data.pl_orbper / 365) * 60 * this.time
     },
     progress() {
       return this.data.st_dist / this.info.st_dist_max
+    },
+    key() {
+      const index = Math.floor(
+        ((this.data.pl_radj - this.info.pl_radj_min) /
+          (this.info.pl_radj_max - this.info.pl_radj_min)) *
+          88
+      )
+      return keys[index]
     },
     playDuration() {
       return this.cycleDuration * this.progress
@@ -63,9 +72,9 @@ export default {
   mounted() {
     this.set_cycle_duration()
 
-    this.$refs.orbit.addEventListener('webkitAnimationIteration', this.play)
+    console.log(this.data.pl_name, ':', this.key)
 
-    // console.log(keys[39])
+    this.$refs.orbit.addEventListener('webkitAnimationIteration', this.play)
   },
   beforeDestroy() {
     this.$refs.orbit.removeEventListener('webkitAnimationIteration', this.play)
@@ -75,10 +84,7 @@ export default {
       this.$refs.orbit.style.animationDuration = this.cycleDuration + 's'
     },
     play() {
-      this.piano.triggerAttackRelease(
-        keys[Math.floor(Math.random() * Math.floor(keys.length))],
-        this.playDuration
-      )
+      this.piano.triggerAttackRelease(this.key, this.playDuration)
     }
   }
 }
@@ -93,7 +99,6 @@ $padding: 24px;
   .panel {
     position: relative;
     padding: $padding;
-    // border-bottom: 1px solid #333;
 
     .orbit {
       width: 100%;

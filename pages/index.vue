@@ -10,6 +10,7 @@
               :size="size"
               :start="start"
               :piano="piano"
+              :time="time"
             />
           </div>
         </div>
@@ -28,9 +29,10 @@ export default {
   components: { Panel },
   data() {
     return {
-      row: Number(this.$route.query.row) || 1,
-      column: Number(this.$route.query.column) || 3,
+      row: Number(this.$route.query.row) || 4,
+      column: Number(this.$route.query.column) || 4,
       size: Math.max(Number(this.$route.query.size) || 160, 120),
+      time: Number(this.$route.query.time) || 60,
       data: [],
       info: {},
       start: false,
@@ -47,11 +49,11 @@ export default {
       )
     })
 
-    //
-    _data = _data.filter(d => {
-      return 0.05 < d.pl_bmassj && d.pl_bmassj < 5
-    })
-    //
+    // //
+    // _data = _data.filter(d => {
+    //   return 0.03 < d.pl_bmassj && d.pl_bmassj < 3
+    // })
+    // //
 
     console.log('cleaned data size: ', _data.length)
 
@@ -83,11 +85,6 @@ export default {
       }
       this.data.push(row_data)
     }
-
-    // const t = _data.filter(d => {
-    //   return d.pl_radj > 0.892
-    // })
-    // console.log(t.length)
   },
   mounted() {
     console.log('data: ', this.data)
