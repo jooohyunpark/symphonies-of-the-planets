@@ -40,23 +40,11 @@ export default {
   created() {
     console.log('original data size: ', __data.length)
 
-    const _data = __data.filter(d => {
-      return (
-        (d.pl_name && d.pl_radj && d.pl_orbper && d.pl_bmassj && d.st_dist) !==
-        null
-      )
+    let _data = __data.filter(d => {
+      return (d.pl_name && d.pl_radj && d.pl_orbper && d.st_dist) !== null
     })
 
     console.log('filtered data size: ', _data.length)
-
-    console.log('orbit period min: ', this.min(_data, 'pl_orbper'))
-    console.log('orbit period max: ', this.max(_data, 'pl_orbper'))
-    console.log('radius min: ', this.min(_data, 'pl_radj'))
-    console.log('radius max: ', this.max(_data, 'pl_radj'))
-    console.log('mass min: ', this.min(_data, 'pl_bmassj'))
-    console.log('mass max: ', this.max(_data, 'pl_bmassj'))
-    console.log('distance min: ', this.min(_data, 'st_dist'))
-    console.log('distance max: ', this.max(_data, 'st_dist'))
 
     this.info = {
       pl_orbper_min: this.min(_data, 'pl_orbper'),
@@ -69,6 +57,15 @@ export default {
       st_dist_min: this.min(_data, 'st_dist')
     }
 
+    console.log('orbit period min: ', this.info.pl_orbper_min)
+    console.log('orbit period max: ', this.info.pl_orbper_max)
+    console.log('radius min: ', this.info.pl_radj_min)
+    console.log('radius max: ', this.info.pl_radj_max)
+    console.log('mass min: ', this.info.pl_bmassj_min)
+    console.log('mass max: ', this.info.pl_bmassj_max)
+    console.log('distance min: ', this.info.st_dist_min)
+    console.log('distance max: ', this.info.st_dist_max)
+
     for (let i = 0; i < this.row; i++) {
       const row_data = []
       for (let j = 0; j < this.column; j++) {
@@ -77,6 +74,11 @@ export default {
       }
       this.data.push(row_data)
     }
+
+    const t = _data.filter(d => {
+      return d.pl_radj > 0.892
+    })
+    console.log(t.length)
   },
   mounted() {
     console.log('data: ', this.data)

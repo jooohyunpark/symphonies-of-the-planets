@@ -64,6 +64,8 @@ export default {
     this.set_cycle_duration()
 
     this.$refs.orbit.addEventListener('webkitAnimationIteration', this.play)
+
+    // console.log(keys[39])
   },
   beforeDestroy() {
     this.$refs.orbit.removeEventListener('webkitAnimationIteration', this.play)
