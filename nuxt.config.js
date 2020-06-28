@@ -16,34 +16,35 @@ export default {
       {
         hid: 'keywords',
         name: 'keywords',
-        content: 'generative music, generative music space'
+        content:
+          'generative music, generative music space, generative music uninverse, universe music, space music'
       },
       {
         hid: 'og:url',
         property: 'og:url',
         content: 'https://symphonies-of-the-planets.parkjoohyun.com/'
       },
+      { hid: 'og:type', property: 'og:type', content: 'website' },
       {
         hid: 'og:title',
         property: 'og:title',
         content: 'Symphonies of the Planets'
       },
-      { hid: 'og:type', property: 'og:type', content: 'website' },
       {
         hid: 'og:description',
         property: 'og:description',
         content: process.env.npm_package_description || ''
       },
-      { hid: 'og:image', property: 'og:image', content: '' },
+      {
+        hid: 'og:image',
+        property: 'og:image',
+        content:
+          'https://symphonies-of-the-planets.parkjoohyun.com/symphonies-of-the-planets.png'
+      },
       {
         hid: 'twitter:card',
         property: 'twitter:card',
         content: 'summary_large_image'
-      },
-      {
-        hid: 'twitter:image',
-        property: 'twitter:image',
-        content: ''
       }
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
