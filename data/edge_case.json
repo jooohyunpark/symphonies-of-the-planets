@@ -2,19 +2,15 @@
     {
         "pl_name": "SWEEPS-11 b",
         "pl_orbper": 1.796,
-        "pl_bmassj": 9.7,
         "pl_radj": 1.13,
         "st_dist": 8500,
-        "st_teff": null,
-        "pl_facility": "Hubble Space Telescope"
+        "pl_massj": 9.7
     },
     {
         "pl_name": "SWEEPS-4 b",
         "pl_orbper": 4.2,
-        "pl_bmassj": 3.8,
         "pl_radj": 0.81,
         "st_dist": 8500,
-        "st_teff": null,
-        "pl_facility": "Hubble Space Telescope"
+        "pl_massj": 3.8
     }
 ]
