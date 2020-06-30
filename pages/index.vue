@@ -1,21 +1,24 @@
 <template>
-  <div class="app" @click="start = true">
-    <transition name="fade">
-      <div v-if="piano && piano.loaded" class="panel-group">
-        <div v-for="i in row" :key="i" class="row">
-          <div v-for="j in column" :id="id(i, j)" :key="j" class="column">
-            <Panel
-              :data="data[i - 1][j - 1]"
-              :info="info"
-              :size="size"
-              :start="start"
-              :piano="piano"
-              :time="time"
-            />
+  <div>
+    <div class="app" @click="start = true">
+      <transition name="fade">
+        <div v-if="piano && piano.loaded" class="panel-group">
+          <div v-for="i in row" :key="i" class="row">
+            <div v-for="j in column" :id="id(i, j)" :key="j" class="column">
+              <Panel
+                :data="data[i - 1][j - 1]"
+                :info="info"
+                :size="size"
+                :start="start"
+                :piano="piano"
+                :time="time"
+              />
+            </div>
           </div>
         </div>
-      </div>
-    </transition>
+      </transition>
+    </div>
+    <div class="poster">Symphonies of the Planets</div>
   </div>
 </template>
 
@@ -124,16 +127,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/style/_colors.scss';
-
 .app {
   width: 100vw;
   height: 100vh;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: $bg-color;
+  background: #000;
 
   .row {
     display: flex;
@@ -144,6 +144,32 @@ export default {
   }
   .fade-enter-active {
     transition: opacity 0.3s ease-in-out;
+  }
+}
+
+.poster {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+  color: #fff;
+  font-size: 18px;
+  letter-spacing: 2px;
+  z-index: 100;
+}
+
+@media screen and (max-width: 1056px) {
+  .app {
+    display: none;
+  }
+
+  .poster {
+    display: flex;
   }
 }
 </style>

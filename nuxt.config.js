@@ -17,7 +17,7 @@ export default {
         hid: 'keywords',
         name: 'keywords',
         content:
-          'generative music, generative music space, generative music uninverse, universe music, space music'
+          'generative music, generative music space, generative music uninverse, universe music, space music, data sonification, symphonies of planets, planet music'
       },
       {
         hid: 'og:url',

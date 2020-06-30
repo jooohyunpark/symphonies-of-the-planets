@@ -62,8 +62,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/style/_colors.scss';
-
 circle {
   transition: stroke-dashoffset 0.3s ease-in-out;
   transform: rotate(-90deg);
