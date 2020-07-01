@@ -59,10 +59,15 @@ export default {
     },
     key() {
       const index = Math.floor(
-        ((this.data.pl_radj - this.info.pl_radj_min) /
-          (this.info.pl_radj_max - this.info.pl_radj_min)) *
-          88
+        87 -
+          Math.min(
+            ((this.data.pl_radj - this.info.pl_radj_min) /
+              (this.info.pl_radj_max - this.info.pl_radj_min)) *
+              88,
+            87
+          )
       )
+      console.log(this.data.pl_radj, index)
       return keys[index]
     },
     playDuration() {

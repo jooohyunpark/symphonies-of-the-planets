@@ -47,16 +47,10 @@ export default {
 
     let _data = __data.filter(d => {
       return (
-        (d.pl_name && d.pl_radj && d.pl_massj && d.pl_orbper && d.st_dist) !==
+        (d.pl_name && d.pl_radj && d.pl_orbper && d.st_dist && d.pl_massj) !==
         null
       )
     })
-
-    // //
-    // _data = _data.filter(d => {
-    //   return 0.03 < d.pl_massj && d.pl_massj < 3
-    // })
-    // //
 
     console.log('cleaned data size: ', _data.length)
 
@@ -120,7 +114,11 @@ export default {
         path[key] = require(`@/assets/sounds/${computed_key(key)}.ogg`)
       })
 
-      this.piano = new Sampler(path, { release: 1 }).toMaster()
+      this.piano = new Sampler(path, {
+        attack: 0,
+        release: 1,
+        curve: 'exponential'
+      }).toMaster()
     }
   }
 }
