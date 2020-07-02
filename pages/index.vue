@@ -32,8 +32,8 @@ export default {
   components: { Panel },
   data() {
     return {
-      row: Number(this.$route.query.row) || 4,
-      column: Number(this.$route.query.column) || 4,
+      row: Number(this.$route.query.row) || 3,
+      column: Number(this.$route.query.column) || 5,
       size: Math.max(Number(this.$route.query.size) || 160, 120),
       time: Number(this.$route.query.time) || 60,
       data: [],
@@ -46,10 +46,7 @@ export default {
     console.log('original data size: ', __data.length)
 
     let _data = __data.filter(d => {
-      return (
-        (d.pl_name && d.pl_radj && d.pl_orbper && d.st_dist && d.pl_massj) !==
-        null
-      )
+      return (d.pl_name && d.pl_radj && d.pl_orbper && d.st_dist) !== null
     })
 
     console.log('cleaned data size: ', _data.length)
@@ -59,8 +56,8 @@ export default {
       pl_orbper_max: this.max(_data, 'pl_orbper'),
       pl_radj_max: this.max(_data, 'pl_radj'),
       pl_radj_min: this.min(_data, 'pl_radj'),
-      pl_massj_max: this.max(_data, 'pl_massj'),
-      pl_massj_min: this.min(_data, 'pl_massj'),
+      // pl_massj_max: this.max(_data, 'pl_massj'),
+      // pl_massj_min: this.min(_data, 'pl_massj'),
       st_dist_max: this.max(_data, 'st_dist'),
       st_dist_min: this.min(_data, 'st_dist')
     }
@@ -69,8 +66,8 @@ export default {
     console.log('orbit period max: ', this.info.pl_orbper_max)
     console.log('radius min: ', this.info.pl_radj_min)
     console.log('radius max: ', this.info.pl_radj_max)
-    console.log('mass min: ', this.info.pl_massj_min)
-    console.log('mass max: ', this.info.pl_massj_max)
+    // console.log('mass min: ', this.info.pl_massj_min)
+    // console.log('mass max: ', this.info.pl_massj_max)
     console.log('distance min: ', this.info.st_dist_min)
     console.log('distance max: ', this.info.st_dist_max)
 

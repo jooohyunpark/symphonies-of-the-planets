@@ -67,7 +67,7 @@ export default {
             87
           )
       )
-      console.log(this.data.pl_radj, index)
+      // console.log(this.data.pl_radj, index)
       return keys[index]
     },
     playDuration() {
@@ -77,7 +77,7 @@ export default {
   mounted() {
     this.set_cycle_duration()
 
-    console.log(this.data.pl_name, ':', this.key)
+    // console.log(this.data.pl_name, ':', this.key)
 
     this.$refs.orbit.addEventListener('webkitAnimationIteration', this.play)
   },
