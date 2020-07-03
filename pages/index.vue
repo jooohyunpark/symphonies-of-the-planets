@@ -39,49 +39,66 @@ export default {
       data: [],
       info: {},
       start: false,
-      piano: null
+      piano: null,
+      earth_radius: 0.0892,
+      iteration: 0
+    }
+  },
+  computed: {
+    count() {
+      const total = this.row * this.column
+      return {
+        total: total,
+        upper_pitch: Math.ceil(total / 2),
+        lower_pitch: Math.floor(total / 2)
+      }
     }
   },
   created() {
     console.log('original data size: ', __data.length)
 
-    let _data = __data.filter(d => {
-      return (d.pl_name && d.pl_radj && d.pl_orbper && d.st_dist) !== null
-    })
+    let _data = __data
+      .filter(d => {
+        return (d.pl_name && d.pl_radj && d.pl_orbper && d.st_dist) !== null
+      })
+      .sort((a, b) => a.pl_radj - b.pl_radj)
 
     console.log('cleaned data size: ', _data.length)
 
-    this.info = {
-      pl_orbper_min: this.min(_data, 'pl_orbper'),
-      pl_orbper_max: this.max(_data, 'pl_orbper'),
-      pl_radj_max: this.max(_data, 'pl_radj'),
-      pl_radj_min: this.min(_data, 'pl_radj'),
-      // pl_massj_max: this.max(_data, 'pl_massj'),
-      // pl_massj_min: this.min(_data, 'pl_massj'),
-      st_dist_max: this.max(_data, 'st_dist'),
-      st_dist_min: this.min(_data, 'st_dist')
-    }
+    this.init_info(_data)
 
-    console.log('orbit period min: ', this.info.pl_orbper_min)
-    console.log('orbit period max: ', this.info.pl_orbper_max)
-    console.log('radius min: ', this.info.pl_radj_min)
-    console.log('radius max: ', this.info.pl_radj_max)
-    // console.log('mass min: ', this.info.pl_massj_min)
-    // console.log('mass max: ', this.info.pl_massj_max)
-    console.log('distance min: ', this.info.st_dist_min)
-    console.log('distance max: ', this.info.st_dist_max)
+    const upper_pitch_data = _data.filter(d => d.pl_radj <= this.earth_radius)
+    const lower_pitch_data = _data.filter(d => d.pl_radj > this.earth_radius)
 
     for (let i = 0; i < this.row; i++) {
       const row_data = []
       for (let j = 0; j < this.column; j++) {
-        const random_index = Math.floor(Math.random() * _data.length)
-        row_data.push(_data[random_index])
+        let temp_data
+
+        if (this.count.total === 1) {
+          temp_data = _data[Math.floor(Math.random() * _data.length)]
+        } else {
+          temp_data =
+            this.iteration < this.count.upper_pitch
+              ? upper_pitch_data[
+                  Math.floor(Math.random() * upper_pitch_data.length)
+                ]
+              : lower_pitch_data[
+                  Math.floor(Math.random() * lower_pitch_data.length)
+                ]
+        }
+
+        row_data.push(temp_data)
+        this.iteration++
       }
       this.data.push(row_data)
     }
+
+    this.data = this.shuffle(this.data)
   },
   mounted() {
     console.log('data: ', this.data)
+
     this.init_piano()
   },
   methods: {
@@ -99,6 +116,39 @@ export default {
         (max, p) => (p[key] > max ? p[key] : max),
         data[0][key]
       )
+    },
+    shuffle(array) {
+      const spread = [].concat(...array)
+      const new_array = []
+
+      for (let i = 0; i < this.row; i++) {
+        const row_data = []
+        for (let j = 0; j < this.column; j++) {
+          const index = Math.floor(Math.random() * spread.length)
+          row_data.push(spread[index])
+          spread.splice(index, 1)
+        }
+        new_array.push(row_data)
+      }
+
+      return new_array
+    },
+    init_info(data) {
+      this.info = {
+        pl_orbper_min: this.min(data, 'pl_orbper'),
+        pl_orbper_max: this.max(data, 'pl_orbper'),
+        pl_radj_max: this.max(data, 'pl_radj'),
+        pl_radj_min: this.min(data, 'pl_radj'),
+        st_dist_max: this.max(data, 'st_dist'),
+        st_dist_min: this.min(data, 'st_dist')
+      }
+
+      console.log('orbit period min: ', this.info.pl_orbper_min)
+      console.log('orbit period max: ', this.info.pl_orbper_max)
+      console.log('radius min: ', this.info.pl_radj_min)
+      console.log('radius max: ', this.info.pl_radj_max)
+      console.log('distance min: ', this.info.st_dist_min)
+      console.log('distance max: ', this.info.st_dist_max)
     },
     init_piano() {
       const path = {}
