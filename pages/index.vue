@@ -94,7 +94,7 @@ export default {
       this.data.push(row_data)
     }
 
-    // console.log(this.data)
+    this.data = this.shuffle(this.data)
   },
   mounted() {
     console.log('data: ', this.data)
@@ -118,30 +118,20 @@ export default {
       )
     },
     shuffle(array) {
-      const temp_array = array
+      const spread = [].concat(...array)
       const new_array = []
 
-      // array.map(row => {
-      //   row.map(column => {
-      //     console.log(row.length)
-      //     new_array[Math.random() * row.length][
-      //       Math.random() * column.length
-      //     ].push(column)
-      //   })
-      // })
-
-      for (let i = 0; i < array.length; i++) {
-        for (let j = 0; j < array[i].length; j++) {
-          const ii = Math.floor(Math.random() * temp_array.length)
-          const jj = Math.floor(Math.random() * temp_array[i].length)
-          new_array.push(array[ii][jj])
-          temp_array[i].splice(jj, 1)
+      for (let i = 0; i < this.row; i++) {
+        const row_data = []
+        for (let j = 0; j < this.column; j++) {
+          const index = Math.floor(Math.random() * spread.length)
+          row_data.push(spread[index])
+          spread.splice(index, 1)
         }
+        new_array.push(row_data)
       }
 
-      console.log()
-
-      // return new_array
+      return new_array
     },
     init_info(data) {
       this.info = {
