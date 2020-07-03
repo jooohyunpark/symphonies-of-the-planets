@@ -50,6 +50,16 @@ export default {
       default: 60
     }
   },
+  data() {
+    return {
+      earth_radius: 0.0892,
+      index: {
+        start: 0,
+        earth: 39,
+        end: 87
+      }
+    }
+  },
   computed: {
     cycleDuration() {
       return (this.data.pl_orbper / 365) * 60 * this.time
@@ -58,18 +68,45 @@ export default {
       return this.data.st_dist / this.info.st_dist_max
     },
     key() {
-      const index = Math.floor(
-        87 -
-          Math.min(
-            ((this.data.pl_radj - this.info.pl_radj_min) /
-              (this.info.pl_radj_max - this.info.pl_radj_min)) *
-              88,
-            87
+      let i
+
+      // upper
+      if (this.data.pl_radj <= this.earth_radius) {
+        i =
+          this.index.earth +
+          Math.floor(
+            ((this.earth_radius - this.data.pl_radj) /
+              (this.earth_radius - this.info.pl_radj_min)) *
+              (this.index.end - this.index.earth)
           )
-      )
-      // console.log(this.data.pl_radj, index)
-      return keys[index]
+      }
+      // lower
+      else {
+        i =
+          this.index.earth -
+          Math.floor(
+            ((this.data.pl_radj - this.earth_radius) /
+              (this.info.pl_radj_max - this.earth_radius)) *
+              (this.index.earth - this.index.start)
+          )
+      }
+
+      console.log(this.data.pl_radj, i)
+      return keys[i]
     },
+    // key() {
+    //   const index = Math.floor(
+    //     87 -
+    //       Math.min(
+    //         ((this.data.pl_radj - this.info.pl_radj_min) /
+    //           (this.info.pl_radj_max - this.info.pl_radj_min)) *
+    //           88,
+    //         87
+    //       )
+    //   )
+    //   // console.log(this.data.pl_radj, index)
+    //   return keys[index]
+    // },
     playDuration() {
       return this.cycleDuration * this.progress
     }
@@ -77,7 +114,7 @@ export default {
   mounted() {
     this.set_cycle_duration()
 
-    // console.log(this.data.pl_name, ':', this.key)
+    console.log(this.data.pl_name, ':', this.key)
 
     this.$refs.orbit.addEventListener('webkitAnimationIteration', this.play)
   },
