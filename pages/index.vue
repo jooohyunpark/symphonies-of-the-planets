@@ -49,8 +49,8 @@ export default {
       const total = this.row * this.column
       return {
         total: total,
-        upper_pitch: Math.ceil(total * 0.5),
-        lower_pitch: Math.floor(total * 0.5)
+        upper_pitch: Math.ceil(total / 2),
+        lower_pitch: Math.floor(total / 2)
       }
     }
   },
