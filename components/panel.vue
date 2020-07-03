@@ -110,7 +110,6 @@ export default {
   },
   methods: {
     set_cycle_duration() {
-      console.log(this.cycleDuration)
       this.$refs.orbit.style.animationDuration = this.cycleDuration + 's'
     },
     play() {
