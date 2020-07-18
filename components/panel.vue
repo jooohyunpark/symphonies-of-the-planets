@@ -101,7 +101,7 @@ export default {
   mounted() {
     this.set_cycle_duration()
 
-    // console.log(this.data.pl_name, ':', this.key)
+    console.log(this.data.pl_name, ':', this.key)
 
     this.$refs.orbit.addEventListener('animationiteration', this.play)
   },
@@ -114,6 +114,11 @@ export default {
     },
     play() {
       this.piano.triggerAttackRelease(this.key, this.playDuration)
+      this.$refs.orbit.classList.add('play')
+
+      setTimeout(() => {
+        this.$refs.orbit.classList.remove('play')
+      }, this.playDuration * 1000)
     }
   }
 }

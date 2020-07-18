@@ -67,4 +67,9 @@ circle {
   transform: rotate(-90deg);
   transform-origin: 50% 50%;
 }
+
+.play circle {
+  fill: #ccc;
+  fill-opacity: 0.2;
+}
 </style>
