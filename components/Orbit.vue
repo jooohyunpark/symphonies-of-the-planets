@@ -9,6 +9,16 @@
       cx="50"
       cy="50"
     />
+
+    <!-- on-play background -->
+    <circle
+      class="background"
+      :r="orbitRadius - strokeWidth / 2"
+      stroke="none"
+      fill="#222"
+      cx="50"
+      cy="50"
+    />
   </svg>
 </template>
 
@@ -68,8 +78,11 @@ circle {
   transform-origin: 50% 50%;
 }
 
-.play circle {
-  fill: #ccc;
-  fill-opacity: 0.2;
+.background {
+  display: none;
+}
+
+.play .background {
+  display: block;
 }
 </style>
