@@ -13,7 +13,7 @@
       :r="orbitRadius"
       :stroke="color"
       :stroke-width="strokeWidth"
-      stroke-opacity="0.03"
+      stroke-opacity="0.08"
       fill="none"
       cx="50"
       cy="50"

@@ -31,7 +31,7 @@ export default {
     },
     size: {
       type: Number,
-      default: 160
+      default: 180
     },
     info: {
       type: Object,
@@ -91,7 +91,6 @@ export default {
           )
       }
 
-      // console.log(this.data.pl_radj, i)
       return keys[i]
     },
     playDuration() {
@@ -125,11 +124,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$padding: 24px;
+$padding: 32px;
 
 .panel-container {
-  // border: 1px solid #333;
-
   .panel {
     position: relative;
     padding: $padding;
@@ -157,7 +154,6 @@ $padding: 24px;
       justify-content: center;
       align-items: center;
       text-align: center;
-
       color: #ccc;
       font-size: 0.8rem;
 

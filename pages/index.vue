@@ -34,7 +34,7 @@ export default {
     return {
       row: Number(this.$route.query.row) || 3,
       column: Number(this.$route.query.column) || 5,
-      size: Math.max(Number(this.$route.query.size) || 160, 120),
+      size: Math.max(Number(this.$route.query.size) || 180, 120),
       time: Number(this.$route.query.time) || 60,
       data: [],
       info: {},
