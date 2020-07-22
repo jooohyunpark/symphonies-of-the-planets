@@ -1,7 +1,7 @@
 {
   "name": "symphonies-of-the-planets",
   "version": "1.0.0",
-  "description": "Generative music of exoplanets",
+  "description": "Generative music composed of 3177 exoplanets data",
   "author": "Joohyun Park",
   "private": true,
   "scripts": {
