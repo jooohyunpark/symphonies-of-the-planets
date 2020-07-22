@@ -1,7 +1,7 @@
 ### symphonies-of-the-planets
 
 
-Generative music composed of 3177 exoplanets data. The dataset is from NASA Exoplanet Archive and mapped based on each property taking Earth as a reference point.
+Generative music composed of 3177 exoplanets data. The physical properties of planets transform into an unique harmony bringing us to the music of nature. The dataset is collected from NASA Exoplanet Archive and mapped based on each property taking Earth as a reference point. 
 
 ```
 Duration – distance from Earth [pc
