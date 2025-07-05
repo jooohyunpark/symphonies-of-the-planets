@@ -1,21 +1,23 @@
 <template>
   <div>
-    <div class="app" @click="start = true">
-      <div v-if="piano" class="panel-group">
-        <div v-for="i in row" :key="i" class="row">
-          <div v-for="j in column" :id="id(i, j)" :key="j" class="column">
-            <Panel
-              :data="data[i - 1][j - 1]"
-              :info="info"
-              :size="size"
-              :start="start"
-              :piano="piano"
-              :time="time"
-            />
+    <transition name="fade" appear>
+      <div class="app" @click="start = true">
+        <div v-if="piano" class="panel-group">
+          <div v-for="i in row" :key="i" class="row">
+            <div v-for="j in column" :id="id(i, j)" :key="j" class="column">
+              <Panel
+                :data="data[i - 1][j - 1]"
+                :info="info"
+                :size="size"
+                :start="start"
+                :piano="piano"
+                :time="time"
+              />
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </transition>
     <div class="poster">Symphonies of the Planets</div>
   </div>
 </template>
@@ -99,7 +101,7 @@ const init_info = (data) => {
   console.log('distance max: ', info.value.st_dist_max)
 }
 
-const init_piano = async () => {
+const init_piano = () => {
   const path = {}
 
   const computed_key = (val) => {
@@ -196,6 +198,17 @@ onMounted(() => {
   font-size: 18px;
   letter-spacing: 2px;
   z-index: 100;
+}
+
+// Vue transition classes
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 1s ease-in-out;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 
 @media screen and (max-width: 1056px) {

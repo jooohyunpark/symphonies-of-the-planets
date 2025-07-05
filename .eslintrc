@@ -1,9 +1,11 @@
 {
-  "extends": ["@nuxtjs/eslint-config"],
+  "extends": ["@nuxtjs/eslint-config", "prettier"],
+  "plugins": ["prettier"],
   "rules": {
     "vue/multi-word-component-names": "off",
     "no-console": "off",
     "no-debugger": "off",
-    "camelcase": "off"
+    "camelcase": "off",
+    "prettier/prettier": "error"
   }
 }
