@@ -1,11 +1,21 @@
-@import "@/assets/style/_font.scss";
+@import '@/assets/style/_font.scss';
 
 * {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
 body {
-    overflow: hidden;
-    background: #000;
+  overflow: hidden;
+  background: #000;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.4s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }

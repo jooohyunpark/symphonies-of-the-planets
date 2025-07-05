@@ -22,53 +22,61 @@
   </svg>
 </template>
 
-<script>
-export default {
-  props: {
-    orbitRadius: {
-      type: Number,
-      default: 40
-    },
-    strokeWidth: {
-      type: Number,
-      default: 2
-    },
-    color: {
-      type: String,
-      default: '#ccc'
-    },
-    progress: {
-      type: Number,
-      default: 0.1
-    }
+<script setup>
+import { ref, computed, onMounted } from 'vue'
+
+// Props
+const props = defineProps({
+  orbitRadius: {
+    type: Number,
+    default: 40
   },
-  data() {
-    return {
-      circumference: this.orbitRadius * 2 * Math.PI
-    }
+  strokeWidth: {
+    type: Number,
+    default: 2
   },
-  computed: {
-    offset() {
-      return (1 - this.progress) * this.circumference
-    }
+  color: {
+    type: String,
+    default: '#ccc'
   },
-  mounted() {
-    this.init_transform_offset()
-    this.$refs.orbit.style.strokeDasharray = `${this.circumference} ${this.circumference}`
-    this.$refs.orbit.style.strokeDashoffset = this.offset
-  },
-  methods: {
-    init_transform_offset() {
-      this.$refs.svg.setAttribute(
-        'style',
-        `transform: rotate(${-1 * this.progress * 360}deg);
-        -webkit-transform: rotate(${-1 * this.progress * 360}deg);
-        -moz-transform: rotate(${-1 * this.progress * 360}deg);
-          `
-      )
-    }
+  progress: {
+    type: Number,
+    default: 0.1
+  }
+})
+
+// Reactive data
+const svg = ref(null)
+const orbit = ref(null)
+const circumference = computed(() => props.orbitRadius * 2 * Math.PI)
+
+// Computed properties
+const offset = computed(() => {
+  return (1 - props.progress) * circumference.value
+})
+
+// Methods
+const init_transform_offset = () => {
+  if (svg.value) {
+    svg.value.setAttribute(
+      'style',
+      `transform: rotate(${-1 * props.progress * 360}deg);
+      -webkit-transform: rotate(${-1 * props.progress * 360}deg);
+      -moz-transform: rotate(${-1 * props.progress * 360}deg);
+        `
+    )
   }
 }
+
+// Lifecycle
+onMounted(() => {
+  init_transform_offset()
+
+  if (orbit.value) {
+    orbit.value.style.strokeDasharray = `${circumference.value} ${circumference.value}`
+    orbit.value.style.strokeDashoffset = offset.value
+  }
+})
 </script>
 
 <style lang="scss" scoped>

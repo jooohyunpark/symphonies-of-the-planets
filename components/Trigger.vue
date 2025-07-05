@@ -21,26 +21,23 @@
   </svg>
 </template>
 
-<script>
-export default {
-  props: {
-    orbitRadius: {
-      type: Number,
-      default: 40
-    },
-    strokeWidth: {
-      type: Number,
-      default: 2
-    },
-    color: {
-      type: String,
-      default: '#ccc'
-    }
+<script setup>
+// Props
+defineProps({
+  orbitRadius: {
+    type: Number,
+    default: 40
   },
-  data() {
-    return {
-      lineLength: 2
-    }
+  strokeWidth: {
+    type: Number,
+    default: 2
+  },
+  color: {
+    type: String,
+    default: '#ccc'
   }
-}
+})
+
+// Reactive data
+const lineLength = 2
 </script>

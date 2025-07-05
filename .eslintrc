@@ -1,24 +1,9 @@
 {
-    "root": true,
-    "env": {
-        "node": true,
-        "browser": true
-    },
-    "globals": {
-        "$nuxt": true
-    },
-    "parserOptions": {
-        "parser": "babel-eslint"
-    },
-    "extends": [
-        "plugin:vue/recommended",
-        "eslint:recommended",
-        "prettier/vue",
-        "plugin:prettier/recommended"
-    ],
-    "rules": {
-        "no-console": 0,
-        "no-debugger": 0,
-        "no-unused-vars": 1
-    }
+  "extends": ["@nuxtjs/eslint-config"],
+  "rules": {
+    "vue/multi-word-component-names": "off",
+    "no-console": "off",
+    "no-debugger": "off",
+    "camelcase": "off"
+  }
 }

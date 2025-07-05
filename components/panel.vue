@@ -14,113 +14,128 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import Orbit from '@/components/Orbit'
 import Trigger from '@/components/Trigger'
 import keys from '@/data/keys'
 
-export default {
-  components: {
-    Orbit,
-    Trigger
+// Props
+const props = defineProps({
+  data: {
+    type: Object,
+    default: () => ({})
   },
-  props: {
-    data: {
-      type: Object,
-      default: () => {}
-    },
-    size: {
-      type: Number,
-      default: 180
-    },
-    info: {
-      type: Object,
-      default: () => {}
-    },
-    start: {
-      type: Boolean,
-      default: false
-    },
-    piano: {
-      type: Object,
-      default: () => {}
-    },
-    time: {
-      type: Number,
-      default: 60
-    }
+  size: {
+    type: Number,
+    default: 180
   },
-  data() {
-    return {
-      earth_radius: 0.0892,
-      index: {
-        start: 0,
-        earth: 39,
-        end: 87
-      }
-    }
+  info: {
+    type: Object,
+    default: () => ({})
   },
-  computed: {
-    cycleDuration() {
-      return (this.data.pl_orbper / 365) * 60 * this.time
-    },
-    progress() {
-      return this.data.st_dist / this.info.st_dist_max
-    },
-    key() {
-      let i
+  start: {
+    type: Boolean,
+    default: false
+  },
+  piano: {
+    type: Object,
+    default: () => ({})
+  },
+  time: {
+    type: Number,
+    default: 60
+  }
+})
 
-      // upper
-      if (this.data.pl_radj <= this.earth_radius) {
-        i =
-          this.index.earth +
-          Math.floor(
-            ((this.earth_radius - this.data.pl_radj) /
-              (this.earth_radius - this.info.pl_radj_min)) *
-              (this.index.end - this.index.earth)
-          )
-      }
-      // lower
-      else {
-        i =
-          this.index.earth -
-          Math.floor(
-            ((this.data.pl_radj - this.earth_radius) /
-              (this.info.pl_radj_max - this.earth_radius)) *
-              (this.index.earth - this.index.start)
-          )
-      }
+// Reactive data
+const orbit = ref(null)
+const earth_radius = ref(0.0892)
+const index = ref({
+  start: 0,
+  earth: 39,
+  end: 87
+})
 
-      return keys[i]
-    },
-    playDuration() {
-      return this.cycleDuration * this.progress
-    }
-  },
-  mounted() {
-    this.set_cycle_duration()
+// Computed properties
+const cycleDuration = computed(() => {
+  return (props.data.pl_orbper / 365) * 60 * props.time
+})
 
-    console.log(this.data.pl_name, ':', this.key)
+const progress = computed(() => {
+  return props.data.st_dist / props.info.st_dist_max
+})
 
-    this.$refs.orbit.addEventListener('animationiteration', this.play)
-  },
-  beforeDestroy() {
-    this.$refs.orbit.removeEventListener('animationiteration', this.play)
-  },
-  methods: {
-    set_cycle_duration() {
-      this.$refs.orbit.style.animationDuration = this.cycleDuration + 's'
-    },
-    play() {
-      this.piano.triggerAttackRelease(this.key, this.playDuration)
-      this.$refs.orbit.classList.add('play')
+const key = computed(() => {
+  let i
 
-      setTimeout(() => {
-        this.$refs.orbit.classList.remove('play')
-      }, this.playDuration * 1000)
-    }
+  // upper
+  if (props.data.pl_radj <= earth_radius.value) {
+    i =
+      index.value.earth +
+      Math.floor(
+        ((earth_radius.value - props.data.pl_radj) /
+          (earth_radius.value - props.info.pl_radj_min)) *
+          (index.value.end - index.value.earth)
+      )
+  }
+  // lower
+  else {
+    i =
+      index.value.earth -
+      Math.floor(
+        ((props.data.pl_radj - earth_radius.value) /
+          (props.info.pl_radj_max - earth_radius.value)) *
+          (index.value.earth - index.value.start)
+      )
+  }
+
+  return keys[i]
+})
+
+const playDuration = computed(() => {
+  return cycleDuration.value * progress.value
+})
+
+// Methods
+const set_cycle_duration = () => {
+  if (orbit.value) {
+    orbit.value.style.animationDuration = cycleDuration.value + 's'
   }
 }
+
+const play = () => {
+  if (props.piano && props.piano.triggerAttackRelease) {
+    props.piano.triggerAttackRelease(key.value, playDuration.value)
+  }
+
+  if (orbit.value) {
+    orbit.value.classList.add('play')
+
+    setTimeout(() => {
+      if (orbit.value) {
+        orbit.value.classList.remove('play')
+      }
+    }, playDuration.value * 1000)
+  }
+}
+
+// Lifecycle
+onMounted(() => {
+  set_cycle_duration()
+
+  console.log(props.data.pl_name, ':', key.value)
+
+  if (orbit.value) {
+    orbit.value.addEventListener('animationiteration', play)
+  }
+})
+
+onBeforeUnmount(() => {
+  if (orbit.value) {
+    orbit.value.removeEventListener('animationiteration', play)
+  }
+})
 </script>
 
 <style lang="scss" scoped>
